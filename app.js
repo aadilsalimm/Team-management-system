@@ -6,8 +6,12 @@ var logger = require('morgan');
 const sqlite3 = require('sqlite3').verbose();
 const hbs = require('express-handlebars');
 
-var indexRouter = require('./routes/index');
+//user routers
+var homeRouter = require('./routes/user/home');
 var usersRouter = require('./routes/users');
+
+//admin routers
+var adminLoginRouter = require('./routes/admin/login');
 
 var app = express();
 
@@ -24,8 +28,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
+app.use('/', homeRouter);
 app.use('/users', usersRouter);
+
+//admin routes
+app.use('/admin',adminLoginRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
