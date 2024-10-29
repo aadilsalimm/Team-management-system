@@ -1,11 +1,32 @@
 html {
   background-color: #00246b;
-
 }
 
 body {
   font-family: "Oswald", sans-serif;
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 850px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.images {
+  padding-top: 5%;
+  
+  padding-left: 1%;
   
 }
 
@@ -20,18 +41,18 @@ h1 {
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+  text-align: center;
+  margin: 40px 0;
 }
 
-.center {
-  position: absolute;
-  margin: auto;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width:850px;
-  height: 100%;
-}
+.buttons-container {
+  
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+  }
+
 
 .btn {
   margin: 0 auto;
@@ -40,7 +61,7 @@ h1 {
   padding: 6px 0 0 3px;
   border: 2px solid #cadcfc;
   border-radius: 2px;
-  background:#cadcfc;
+  background: #cadcfc;
   font-size: 16px;
   line-height: 54px;
   color: #000000;
@@ -56,14 +77,13 @@ h1 {
   -webkit-transition: background .4s, color .4s;
   transition: background .4s, color .4s;
   cursor: pointer;
+  
+  
 }
 
 .btn:hover {
-    background:#00246b;
-    color:#ffff ;
-}
-.images{
-  padding-left: 20%;
+  background: #00246b;
+  color: #ffffff;
 }
 
 a {

@@ -2,7 +2,8 @@
 
 .login-page {
   width: 360px;
-  padding: 8% 0 0;
+  padding: 5% 0 0;
+  padding-left:1%;
   margin: auto;
 }
 .form {
@@ -95,4 +96,13 @@ body {
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      
+}
+
+.images{
+  /* padding-left: 37%;
+  padding-top:3% ; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
