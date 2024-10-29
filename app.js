@@ -5,8 +5,11 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const sqlite3 = require('sqlite3').verbose();
 const hbs = require('express-handlebars');
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 //user routers
+var welcomeRouter = require('./routes/welcome');
 var homeRouter = require('./routes/user/home');
 var usersRouter = require('./routes/users');
 
@@ -28,7 +31,17 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', homeRouter);
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(session({
+    secret: 'your-secret-key',
+    resave: false,
+    saveUninitialized: false
+}));
+
+//user routes
+app.use('/', welcomeRouter);
 app.use('/users', usersRouter);
 
 //admin routes
