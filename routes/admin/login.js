@@ -35,7 +35,8 @@ router.post('/submit-login',(req, res) => {
         req.session.userId = user.id;
 
         //res.render('dfd/userList',rows);
-        res.send('login success');
+        //res.send('login success');
+        res.redirect('/admin-home');
 
     });
 });

@@ -15,6 +15,7 @@ var usersRouter = require('./routes/users');
 
 //admin routers
 var adminLoginRouter = require('./routes/admin/login');
+var adminHomeRouter = require('./routes/admin/admin-home');
 
 var app = express();
 
@@ -46,6 +47,7 @@ app.use('/users', usersRouter);
 
 //admin routes
 app.use('/admin',adminLoginRouter);
+app.use('/admin-home',adminHomeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
