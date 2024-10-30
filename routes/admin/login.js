@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../dbConnect');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('admin/login');
@@ -32,11 +33,15 @@ router.post('/submit-login',(req, res) => {
         }
 
         // Set session
-        req.session.userId = user.id;
+        //req.session.userId = user.id;
 
         //res.render('dfd/userList',rows);
         //res.send('login success');
+        //res.redirect('/admin-home');
+
+        req.session.admin = { username: req.body.username }; // Set the session
         res.redirect('/admin-home');
+        //res.redirect('/admin'); // Redirect back if login fails
 
     });
 });
