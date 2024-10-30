@@ -32,19 +32,19 @@ router.post('/submit-login',(req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Set session
-        //req.session.userId = user.id;
-
-        //res.render('dfd/userList',rows);
-        //res.send('login success');
-        //res.redirect('/admin-home');
-
         req.session.admin = { username: req.body.username }; // Set the session
         res.redirect('/admin-home');
-        //res.redirect('/admin'); // Redirect back if login fails
 
     });
 });
 
+router.get('/logout', (req, res) => {
+    req.session.destroy(err => {
+        if (err) {
+            return res.status(500).json({ error: 'Error logging out' });
+        }
+        res.redirect('/admin');
+    });
+});
 
 module.exports = router;
