@@ -32,12 +32,16 @@ router.post('/submit-login',(req, res) => {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        req.session.admin = { username: req.body.username }; // Set the session
+        req.session.admin = {
+            username: user.username,
+            adminName: user.admin_name,
+            teamID: user.Team,
+        };
         res.redirect('/admin-home');
-
     });
 });
 
+//Logout
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
