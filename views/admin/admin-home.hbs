@@ -37,48 +37,24 @@
     <thead>
       <tr>
         <th>Player</th>
-        <th>Matches</th>
-        <th>Runs</th>
-        <th>Bat.avg</th>
-        <th>Actions</th>
+        <th>Role</th>
+        {{!-- <th>Runs</th>
+        <th>Bat.avg</th>  --}}
+        <th>Actions</th> 
       </tr>
     </thead>
     <tbody>
-      <!-- Adding 15 player rows -->
+      
+      {{#each playerData}}
       <tr>
-        <td>Adithyan</td>
-        <td>189</td>
-        <td>10000</td>
-        <td>55</td>
+        <td>{{player_name}}</td>
+        <td>{{role}}</td>
         <td>
           <button class="action-btn edit-btn">Edit</button>
           <button class="action-btn delete-btn">Delete</button>
         </td>
       </tr>
-      <tr>
-        <td>Abhiram</td>
-        <td>189</td>
-        <td>10000</td>
-        <td>55</td>
-        <td>
-          <button class="action-btn edit-btn">Edit</button>
-          <button class="action-btn delete-btn">Delete</button>
-        </td>
-      </tr>
-      <!-- Additional placeholder rows for a total of 15 -->
-      <tr><td>Player 3</td><td>120</td><td>4500</td><td>36</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 4</td><td>80</td><td>3400</td><td>42.5</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 5</td><td>70</td><td>2000</td><td>28.5</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 6</td><td>50</td><td>3000</td><td>50.0</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 7</td><td>150</td><td>7000</td><td>46.7</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 8</td><td>130</td><td>6800</td><td>52.3</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 9</td><td>200</td><td>8900</td><td>44.5</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 10</td><td>180</td><td>10200</td><td>56.7</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 11</td><td>90</td><td>4200</td><td>38.0</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 12</td><td>110</td><td>6000</td><td>54.5</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 13</td><td>75</td><td>2500</td><td>33.3</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 14</td><td>65</td><td>1900</td><td>29.2</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
-      <tr><td>Player 15</td><td>95</td><td>4900</td><td>51.6</td><td><button class="action-btn edit-btn">Edit</button><button class="action-btn delete-btn">Delete</button></td></tr>
+      {{/each}}
     </tbody>
   </table>
 </div>
