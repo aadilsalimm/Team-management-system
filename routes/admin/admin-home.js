@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const db = require('../../dbConnect');
 const isAuthenticated = require('../../authenticate');
-const {adminName} = require('./login');
 
 router.use(isAuthenticated);
 
@@ -55,7 +54,7 @@ router.post('/edit', async(req,res) => {
         name: req.body.name,
         role: req.body.role
     };
-    console.log(oldData);
+    //console.log(oldData);
     
     res.render('admin/update-form',{oldData});
 });
@@ -69,7 +68,26 @@ router.post('/update-button', async (req,res) => {
             return res.status(500).json({ error: 'Error updating user'});
         }
 
-        res.json({message : 'User updated Successfully'});
+        res.redirect('/admin-home');
+    });
+});
+
+//Add player
+var currentTeam;
+router.get('/add', async (req,res) => {
+    currentTeam = req.session.admin.teamID;
+    res.render('admin/add-form');
+})
+
+router.post('/add-button', async (req,res) => {
+    const query = `INSERT INTO Players (player_name, team, role) VALUES (?, ?, ?)`;
+    
+    db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error updating user'});
+        }
+
+        res.redirect('/admin-home');
     })
 })
 
