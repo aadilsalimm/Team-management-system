@@ -22,12 +22,11 @@ router.get('/', async(req, res) => {
         );
     });
 
-  
+    // Getting player data
     const playerData = await new Promise((resolve, reject) => {
         db.all(`
             SELECT 
-                player_name, 
-                role,
+                *,
                 (SELECT COUNT(*) FROM Players WHERE team = ?) as count
             FROM Players 
             WHERE team = ?
@@ -39,10 +38,6 @@ router.get('/', async(req, res) => {
         });
     });
 
-    // Log the data to help with debugging
-    //console.log('Team Info:', teamInfo);
-    //console.log('Player Data:', playerData);
-
     res.render('admin/admin-home', { 
         adminData, 
         teamInfo, 
@@ -51,5 +46,31 @@ router.get('/', async(req, res) => {
     });
     
 });
+
+//Edit player
+var oldData;
+router.post('/edit', async(req,res) => {
+    oldData = {
+        player_id: req.body.id,
+        name: req.body.name,
+        role: req.body.role
+    };
+    console.log(oldData);
+    
+    res.render('admin/update-form',{oldData});
+});
+
+router.post('/update-button', async (req,res) => {
+    const query = `UPDATE Players SET player_name = ?, role = ? WHERE player_id = ?`;
+    //console.log(oldData.player_id + " " + req.body.name +" " + req.body.role);
+
+    db.run(query,[req.body.name, req.body.role, oldData.player_id], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error updating user'});
+        }
+
+        res.json({message : 'User updated Successfully'});
+    })
+})
 
 module.exports = router;

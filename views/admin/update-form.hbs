@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/update_form.css">
+
+</head>
+<body>
+    
+</body>
+</html>
+<div class="container">  
+  <form id="contact" action="/admin-home/update-button" method="post">
+    <h3>Edit player</h3>
+    <h4>Enter the updated details of Player : </h4>
+    <fieldset>
+      <input name="name" placeholder="Player name ({{oldData.name}})" type="text" tabindex="1" required autofocus>
+    </fieldset>
+    <fieldset>
+      <input name="role" placeholder="Role ({{oldData.role}})" type="text" tabindex="2" required>
+    </fieldset>
+    {{!-- <fieldset>
+      <input placeholder="Runs" type="number" tabindex="3" required>
+    </fieldset>
+    <fieldset>
+      <input placeholder="" type="number" tabindex="4" required>
+    </fieldset>
+    <fieldset>
+      <textarea placeholder="Type your message here...." tabindex="5" required></textarea>
+    </fieldset> --}}
+    <fieldset>
+      <button type="submit" id="contact-submit" data-submit="...Sending">Submit</button>
+    </fieldset>
+    {{!-- <p class="copyright">Designed by <a href="#" target="_blank" title="Colorlib" style="color:#cadcfc">Velaryonz</a></p> --}}
+  </form>
+</div>
