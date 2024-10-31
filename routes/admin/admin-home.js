@@ -8,20 +8,46 @@ router.use(isAuthenticated);
 
 
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
     const adminData = req.session.admin;
-    var teamInfo;
 
-    db.get('SELECT team_name FROM Teams WHERE team_id = ?',[adminData.teamID], (err,data) => {
-        teamInfo = data.teamName;
-    })
+    // Get team info
+    const teamInfo = await new Promise((resolve, reject) => {
+        db.get('SELECT team_name, captain_id FROM Teams WHERE team_id = ?', 
+            [adminData.teamID], 
+            (err, data) => {
+                if (err) reject(err);
+                else resolve(data);
+            }
+        );
+    });
 
-    db.all('SELECT count(player_id) AS count, player_name, role FROM Players WHERE team = ?', [adminData.teamID], (err,data) => {
-        if(err) {
-            return res.status(500).json({ error: 'Server error' });
-        }
+    // Modified query to get both player details and count
+    const playerData = await new Promise((resolve, reject) => {
+        db.all(`
+            SELECT 
+                player_name, 
+                role,
+                (SELECT COUNT(*) FROM Players WHERE team = ?) as count
+            FROM Players 
+            WHERE team = ?
+        `, 
+        [adminData.teamID, adminData.teamID], 
+        (err, data) => {
+            if (err) reject(err);
+            else resolve(data);
+        });
+    });
 
-        res.render('admin/admin-home',{adminData,teamInfo,data});
+    // Log the data to help with debugging
+    //console.log('Team Info:', teamInfo);
+    //console.log('Player Data:', playerData);
+
+    res.render('admin/admin-home', { 
+        adminData, 
+        teamInfo, 
+        playerData,
+        playerCount: playerData.length > 0 ? playerData[0].count : 0
     });
     
 });
