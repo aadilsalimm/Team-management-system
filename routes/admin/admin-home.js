@@ -13,7 +13,7 @@ router.get('/', async(req, res) => {
 
     // Get team info
     const teamInfo = await new Promise((resolve, reject) => {
-        db.get('SELECT team_name, captain_id FROM Teams WHERE team_id = ?', 
+        db.get('SELECT team_name, player_name AS captain FROM Teams,Players WHERE team_id = ? AND Teams.captain_id = Players.player_id', 
             [adminData.teamID], 
             (err, data) => {
                 if (err) reject(err);
@@ -22,7 +22,7 @@ router.get('/', async(req, res) => {
         );
     });
 
-    // Modified query to get both player details and count
+  
     const playerData = await new Promise((resolve, reject) => {
         db.all(`
             SELECT 
