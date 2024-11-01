@@ -12,7 +12,7 @@ router.get('/', async(req, res) => {
 
     // Get team info
     const teamInfo = await new Promise((resolve, reject) => {
-        db.get('SELECT team_name, player_name AS captain FROM Teams,Players WHERE team_id = ? AND Teams.captain_id = Players.player_id', 
+        db.get('SELECT team_name, player_name AS captain, captain_id FROM Teams,Players WHERE team_id = ? AND Teams.captain_id = Players.player_id', 
             [adminData.teamID], 
             (err, data) => {
                 if (err) reject(err);
@@ -20,7 +20,7 @@ router.get('/', async(req, res) => {
             }
         );
     });
-
+ 
     // Getting player data
     const playerData = await new Promise((resolve, reject) => {
         db.all(`
@@ -89,6 +89,22 @@ router.post('/add-button', async (req,res) => {
 
         res.redirect('/admin-home');
     })
+})
+
+//Delete User
+router.post('/delete', async(req,res) => {
+    if(req.body.id === req.body.captain) {
+        return res.send('Cannot delete captain');
+    }
+
+    const query = `DELETE FROM Players WHERE player_id = ?`;
+    db.run(query,[req.body.id], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error deleting user'});
+        }
+
+        res.redirect('/admin-home');
+    })    
 })
 
 module.exports = router;

@@ -60,13 +60,16 @@
             <button class="action-btn edit-btn">Edit</button>
           </form>
 
-          <button class="action-btn delete-btn">Delete</button>
+          <form action="/admin-home/delete" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value={{this.player_id}}>
+            <input type="hidden" name="captain" value={{../teamInfo.captain_id}}>
+            <button class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this player?')"> Delete</button>
+          </form>        
         </td>
       </tr>
       {{/each}}
     </tbody>
   </table>
 </div>
-
 </body>
 </html>
