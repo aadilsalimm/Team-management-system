@@ -1,0 +1,116 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Colors */
+:root {
+    --primary-color: #00246b;
+    --background-color: #cadcfc;
+    --card-color: #ffffff;
+    --text-color: #ffffff; /* White text color for header */
+}
+
+/* Body Styling */
+body {
+    background-color: var(--background-color); /* Set background color to #cadcfc */
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* Full-Width Header */
+.header {
+    width: 100%;
+    background-color: var(--primary-color); /* Dark blue background for header */
+    color: var(--text-color); /* Set text color to white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    position: fixed; /* Fixed at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header img {
+    width: 120px; /* Increased logo size */
+    height: 120px; /* Increased logo size */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Adjusted margin */
+}
+
+.header h1 {
+    font-size: 3.5em; /* Increased heading size */
+}
+
+/* Details Section */
+.details {
+    margin: 70px 0 20px; /* Adjust margin-top for header height */
+    font-size: 2.0em;
+    color: var(--primary-color);
+    text-align: center;
+    width: 100%; /* Ensure full width */
+}
+
+/* Section Headline */
+.section-headline {
+    font-size: 2.2em;
+    margin: 30px 0 20px;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    text-align: center; /* Center the headline */
+    width: 100%; /* Ensure full width */
+}
+
+/* Card Container */
+.card-container {
+    display: flex;
+    gap: 20px; /* Reduced gap */
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding: 20px; /* Add padding around the container */
+}
+
+/* Card Styling */
+.card {
+    width: 300px; /* Increased card width for teams */
+    height: 350px; /* Increased card height for teams */
+    background-color: var(--card-color); /* White background for cards */
+    border: 1px solid var(--primary-color); /* Set border color to #00246b */
+    border-radius: 10px; /* Slightly rounded corners */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5em; /* Increased font size */
+    color: var(--primary-color); /* Text color for cards as #00246b */
+    padding: 20px; /* Added padding */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Scale up the card slightly */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Increase shadow on hover */
+}
+
+button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer; /* Ensures the cursor changes to a pointer on hover */
+    width: 100%; /* Ensures the button covers the full width of the card */
+    height: 100%; /* Ensures the button covers the full height of the card */
+}

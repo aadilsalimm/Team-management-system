@@ -43,6 +43,7 @@ app.use(session({
 
 //user routes
 app.use('/', welcomeRouter);
+app.use('/home',homeRouter);
 app.use('/users', usersRouter);
 
 //admin routes
