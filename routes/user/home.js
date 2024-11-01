@@ -23,8 +23,38 @@ router.get('/', async function(req, res, next) {
     })
   });
 
-  console.log(teamData);
+  //console.log(teamData);
   res.render('user/home',{teamData, teamCount : teamData[0].count, playerCount : playerCount.count});
+});
+
+//Team-Profile
+router.post('/team', async(req,res) => {
+  const teamInfo = await new Promise((resolve, reject) => {
+    db.get('SELECT team_name, player_name AS captain FROM Teams,Players WHERE team_id = ? AND Teams.captain_id = Players.player_id', 
+        [req.body.id], 
+        (err, data) => {
+            if (err) reject(err);
+            else resolve(data);
+        }
+    );
+  });
+
+  const playerData = await new Promise((resolve, reject) => {
+    db.all(`
+        SELECT 
+            *,
+            (SELECT COUNT(*) FROM Players WHERE team = ?) as count
+        FROM Players 
+        WHERE team = ?
+        `, 
+      [req.body.id, req.body.id], 
+      (err, data) => {
+        if (err) reject(err);
+        else resolve(data);
+    });
+  });
+
+  res.render('user/team-profile', {teamInfo, playerData, playerCount : playerData[0].count});
 });
 
 module.exports = router;

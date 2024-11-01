@@ -22,7 +22,7 @@
     <div class="card-container">
         {{#each teamData}}
         <form action="/home/team" method="POST">
-        <input type="hidden" name="id" value="this.team_id">
+        <input type="hidden" name="id" value={{this.team_id}}>
         <button>
         <div class="card team-card">{{this.team_name}}</div>
         </button>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sports Management Page</title>
+  <link rel="stylesheet" href="/stylesheets/team_profile.css">
+</head>
+<body>
+
+<div class="header">
+    <img class="logo" src="/images/velaryonz_transparent_svg.svg"alt="logo">
+  <h1>{{teamInfo.team_name}} Team</h1>
+</div>
+
+<div class="details">
+  <div class="details-left">
+    <h3>
+      <ul>
+        <li>Captain - {{teamInfo.captain}}</li>
+        <li>{{playerCount}} players</li>
+      </ul>
+    </h3>
+  </div>
+  
+</div>
+
+<div class="container">
+  <table>
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+    {{#each playerData}}
+      <tr>
+        <td>{{this.player_name}}</td>
+        <td>{{this.role}}</td> 
+      </tr>
+    {{/each}}
+    </tbody>
+  </table>
+</div>
+
+  <div class="details-right">
+    <a href="/home">
+    <button>Go back</button>
+    </a>
+  </div>
+
+</body>
+</html>
