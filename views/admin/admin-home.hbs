@@ -27,14 +27,23 @@
       </ul>
     </h3>
   </div>
-  <div class="details-right">
+  {{!-- <div class="details-right">
     <a href="/admin-home/add">
     <button>Add player</button>
     </a>
-  </div>
+  </div> --}}
+</div>
+<div class="subheading">
+  <h2>Players</h2>
 </div>
 
-<div class="container">
+  <div class="details-right" style="text-align : center">
+    <a href="/admin-home/add-player">
+    <button>Add Player</button>
+    </a>
+  </div>
+
+<div class="container" style="margin: 10px auto 30px auto">
   <table>
     <thead>
       <tr>
@@ -53,14 +62,14 @@
         <td>{{role}}</td>
         <td>
 
-          <form action="/admin-home/edit" method="POST" style="display:inline;">
+          <form action="/admin-home/edit-player" method="POST" style="display:inline;">
             <input type="hidden" name="id" value={{this.player_id}}>
             <input type="hidden" name="name" value={{this.player_name}}>
             <input type="hidden" name="role" value={{this.role}}>
             <button class="action-btn edit-btn">Edit</button>
           </form>
 
-          <form action="/admin-home/delete" method="POST" style="display:inline;">
+          <form action="/admin-home/delete-player" method="POST" style="display:inline;">
             <input type="hidden" name="id" value={{this.player_id}}>
             <input type="hidden" name="captain" value={{../teamInfo.captain_id}}>
             <button class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this player?')"> Delete</button>
@@ -71,5 +80,54 @@
     </tbody>
   </table>
 </div>
+
+<div class="subheading">
+  <h2>Supporting Staffs</h2>
+</div>
+
+  <div class="details-right" style="text-align : center">
+    <a href="/admin-home/add-staff">
+    <button>Add Staff</button>
+    </a>
+  </div>
+
+<div class="container" style="margin: 10px auto 30px auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Role</th>
+        {{!-- <th>Runs</th>
+        <th>Bat.avg</th>  --}}
+        <th>Actions</th> 
+      </tr>
+    </thead>
+    <tbody>
+      
+      {{#each supportingStaffData}}
+      <tr>
+        <td>{{staff_name}}</td>
+        <td>{{role}}</td>
+        <td>
+
+          <form action="/admin-home/edit-staff" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value={{this.player_id}}>
+            <input type="hidden" name="name" value={{this.player_name}}>
+            <input type="hidden" name="role" value={{this.role}}>
+            <button class="action-btn edit-btn">Edit</button>
+          </form>
+
+          <form action="/admin-home/delete-staff" method="POST" style="display:inline;">
+            <input type="hidden" name="id" value={{this.player_id}}>
+            <input type="hidden" name="captain" value={{../teamInfo.captain_id}}>
+            <button class="action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this player?')"> Delete</button>
+          </form>        
+        </td>
+      </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
+
 </body>
 </html>

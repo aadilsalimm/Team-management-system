@@ -37,18 +37,27 @@ router.get('/', async(req, res) => {
         });
     });
 
+    //Getting Supporting staff data
+    const supportingStaffData = await new Promise((resolve, reject) => {
+        db.all(`SELECT * FROM Supporting_staff WHERE team = ?`,[adminData.teamID], (err,data) => {
+            if(err) reject (err);
+            else resolve(data);
+        })
+    })
+
     res.render('admin/admin-home', { 
         adminData, 
         teamInfo, 
         playerData,
-        playerCount: playerData.length > 0 ? playerData[0].count : 0
+        playerCount: playerData.length > 0 ? playerData[0].count : 0,
+        supportingStaffData
     });
     
 });
 
 //Edit player
 var oldData;
-router.post('/edit', async(req,res) => {
+router.post('/edit-player', async(req,res) => {
     oldData = {
         player_id: req.body.id,
         name: req.body.name,
@@ -74,7 +83,7 @@ router.post('/update-button', async (req,res) => {
 
 //Add player
 var currentTeam;
-router.get('/add', async (req,res) => {
+router.get('/add-player', async (req,res) => {
     currentTeam = req.session.admin.teamID;
     res.render('admin/add-form');
 })
@@ -92,7 +101,7 @@ router.post('/add-button', async (req,res) => {
 })
 
 //Delete User
-router.post('/delete', async(req,res) => {
+router.post('/delete-player', async(req,res) => {
     if(req.body.id === req.body.captain) {
         return res.send('Cannot delete captain');
     }
@@ -107,4 +116,23 @@ router.post('/delete', async(req,res) => {
     })    
 })
 
+
+//add Staff
+var currentTeam;
+router.get('/add-staff', async (req,res) => {
+    currentTeam = req.session.admin.teamID;
+    res.render('admin/add-form');
+})
+
+router.post('/add-button', async (req,res) => {
+    const query = `INSERT INTO Players (player_name, team, role) VALUES (?, ?, ?)`;
+    
+    db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error updating user'});
+        }
+
+        res.redirect('/admin-home');
+    })
+})
 module.exports = router;
