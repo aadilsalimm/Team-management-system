@@ -12,11 +12,11 @@
 </body>
 </html>
 <div class="container">  
-  <form id="contact" action="/admin-home/update-button" method="post">
-    <h3>Edit player</h3>
-    <h4>Enter the updated details of Player : </h4>
+  <form id="contact" action={{route}} method="post">
+    <h3>Edit {{person}}</h3>
+    <h4>Enter the updated details of the {{person}} : </h4>
     <fieldset>
-      <input name="name" placeholder="Player name ({{oldData.name}})" type="text" tabindex="1" required autofocus>
+      <input name="name" placeholder="{{person}} name ({{oldData.name}})" type="text" tabindex="1" required autofocus>
     </fieldset>
     <fieldset>
       <input name="role" placeholder="Role ({{oldData.role}})" type="text" tabindex="2" required>
