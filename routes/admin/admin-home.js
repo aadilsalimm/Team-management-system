@@ -65,10 +65,10 @@ router.post('/edit-player', async(req,res) => {
     };
     //console.log(oldData);
     
-    res.render('admin/update-form',{oldData});
+    res.render('admin/update-form',{oldData, person: 'Player', route: '/admin-home/update-button-player'});
 });
 
-router.post('/update-button', async (req,res) => {
+router.post('/update-button-player', async (req,res) => {
     const query = `UPDATE Players SET player_name = ?, role = ? WHERE player_id = ?`;
     //console.log(oldData.player_id + " " + req.body.name +" " + req.body.role);
 
@@ -85,10 +85,10 @@ router.post('/update-button', async (req,res) => {
 var currentTeam;
 router.get('/add-player', async (req,res) => {
     currentTeam = req.session.admin.teamID;
-    res.render('admin/add-form');
+    res.render('admin/add-form', {person : 'Player', route : '/admin-home/add-button-player'});
 })
 
-router.post('/add-button', async (req,res) => {
+router.post('/add-button-player', async (req,res) => {
     const query = `INSERT INTO Players (player_name, team, role) VALUES (?, ?, ?)`;
     
     db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
@@ -100,7 +100,7 @@ router.post('/add-button', async (req,res) => {
     })
 })
 
-//Delete User
+//Delete Player
 router.post('/delete-player', async(req,res) => {
     if(req.body.id === req.body.captain) {
         return res.send('Cannot delete captain');
@@ -109,7 +109,7 @@ router.post('/delete-player', async(req,res) => {
     const query = `DELETE FROM Players WHERE player_id = ?`;
     db.run(query,[req.body.id], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error deleting user'});
+            return res.status(500).json({ error: 'Error deleting player'});
         }
 
         res.redirect('/admin-home');
@@ -121,13 +121,13 @@ router.post('/delete-player', async(req,res) => {
 var currentTeam;
 router.get('/add-staff', async (req,res) => {
     currentTeam = req.session.admin.teamID;
-    res.render('admin/add-form');
+    res.render('admin/add-form', {person : 'Staff', route : '/admin-home/add-button-staff'});
 })
 
-router.post('/add-button', async (req,res) => {
-    const query = `INSERT INTO Players (player_name, team, role) VALUES (?, ?, ?)`;
+router.post('/add-button-staff', async (req,res) => {
+    const query = `INSERT INTO Supporting_staff (staff_name, role, team) VALUES (?, ?, ?)`;
     
-    db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
+    db.run(query,[req.body.name, req.body.role, currentTeam], (err) => {
         if(err) {
             return res.status(500).json({ error: 'Error updating user'});
         }
@@ -135,4 +135,43 @@ router.post('/add-button', async (req,res) => {
         res.redirect('/admin-home');
     })
 })
+
+//Update staff
+var oldData;
+router.post('/edit-staff', async(req,res) => {
+    oldData = {
+        staff_id: req.body.id,
+        name: req.body.name,
+        role: req.body.role
+    };
+    //console.log(oldData);
+    
+    res.render('admin/update-form',{oldData, person: 'Staff', route: '/admin-home/update-button-staff'});
+});
+
+router.post('/update-button-staff', async (req,res) => {
+    const query = `UPDATE Supporting_staff SET staff_name = ?, role = ? WHERE staff_id = ?`;
+    //console.log(oldData.player_id + " " + req.body.name +" " + req.body.role);
+
+    db.run(query,[req.body.name, req.body.role, oldData.staff_id], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error updating user'});
+        }
+
+        res.redirect('/admin-home');
+    });
+});
+
+//Delete Staff
+router.post('/delete-staff', async(req,res) => {
+    const query = `DELETE FROM Supporting_staff WHERE staff_id = ?`;
+    db.run(query,[req.body.id], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Error deleting staff'});
+        }
+
+        res.redirect('/admin-home');
+    })    
+})
+
 module.exports = router;
