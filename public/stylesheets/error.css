@@ -1,0 +1,85 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Main Colors */
+:root {
+    --primary-color: #00246b;
+    --background-color: #cadcfc;
+    --card-color: #ffffff;
+    --text-color: #ffffff; /* White text color for header */
+}
+
+/* Body Styling */
+body {
+    background-color: var(--background-color); /* Set background color to #cadcfc */
+    color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* Full-Width Header */
+.header {
+    width: 100%;
+    background-color: var(--primary-color); /* Dark blue background for header */
+    color: var(--text-color); /* Set text color to white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 0;
+    position: fixed; /* Fixed at the top */
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.header img {
+    width: 120px; /* Increased logo size */
+    height: 120px; /* Increased logo size */
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px; /* Adjusted margin */
+}
+
+.header h1 {
+    font-size: 3.5em; /* Increased heading size */
+}
+
+.err {
+    line-height: .95;
+    color: #00246b;
+    font-weight: 500;
+    font-size: 50px;
+    /* text-transform: uppercase; */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    text-align: center;
+    margin: auto auto;
+  }
+
+  .details-right button {
+    display: block;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #00246b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 20px auto 40px auto;
+  }
+
+  a {
+    text-decoration: none;
+  }

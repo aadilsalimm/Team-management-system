@@ -14,22 +14,22 @@ router.post('/submit-login',(req, res) => {
 
     // Input validation
     if (!username || !password) {
-        return res.status(400).json({ error: 'Username and password are required' });
+        return res.render('error',{ message : 'Username and password are required' , returnRoute : '/admin'});
     }
 
     // Find user
     db.get('SELECT * FROM Admins WHERE username = ?', [username], async (err, user) => {
         if (err) {
-            return res.status(500).json({ error: 'Server error' });
+            return res.render('error',{ message : 'Server error', returnRoute : '/admin' });
         }
         if (!user) {
-            return res.status(401).json({ error: 'Invalid credentials' });
+            return res.render('error',{message : 'Invalid credentials', returnRoute : '/admin'});
         }
 
         // Check password
         const validPassword = (password === user.password);
         if (!validPassword) {
-            return res.status(401).json({ error: 'Invalid credentials' });
+            return res.render('error',{message : 'Invalid credentials', returnRoute : '/admin'});
         }
 
         req.session.admin = {
@@ -45,7 +45,7 @@ router.post('/submit-login',(req, res) => {
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
-            return res.status(500).json({ error: 'Error logging out' });
+            return res.render('error',{message : 'Error Logging out', returnRoute : '/admin-home'});
         }
         res.redirect('/admin');
     });

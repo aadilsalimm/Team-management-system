@@ -1,3 +1,28 @@
-<h1>{{message}}</h1>
-<h2>{{error.status}}</h2>
-<pre>{{error.stack}}</pre>
+{{!-- <h2>{{error.status}}</h2>
+<pre>{{error.stack}}</pre> --}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<link rel="stylesheet" type="text/css"href="/stylesheets/error.css">
+
+<body>
+    <div class="header">
+        <img src="/images/velaryonz_transparent_svg.svg" alt="Velaryonz Sports Club Logo">
+        <h1>Velaryonz Sports Club</h1>
+    </div>
+    <br>
+    <br>
+    <h1 class="err">Error: {{message}}</h1>
+
+      <div class="details-right">
+    <a href={{returnRoute}}>
+    <button>Go back</button>
+    </a>
+  </div>
+
+  </body>
+</html>

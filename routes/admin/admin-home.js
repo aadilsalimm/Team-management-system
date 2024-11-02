@@ -74,7 +74,7 @@ router.post('/update-button-player', async (req,res) => {
 
     db.run(query,[req.body.name, req.body.role, oldData.player_id], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error updating user'});
+            return res.render('error',{message : 'Error updating user', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
@@ -93,7 +93,7 @@ router.post('/add-button-player', async (req,res) => {
     
     db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error updating user'});
+            return res.render('error',{message : 'Error in adding player', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
@@ -103,13 +103,13 @@ router.post('/add-button-player', async (req,res) => {
 //Delete Player
 router.post('/delete-player', async(req,res) => {
     if(req.body.id === req.body.captain) {
-        return res.send('Cannot delete captain');
+        return res.render('error',{message : 'Cannot delete Captain', returnRoute : '/admin-home'});
     }
 
     const query = `DELETE FROM Players WHERE player_id = ?`;
     db.run(query,[req.body.id], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error deleting player'});
+            return res.render('error',{message : 'Error in deleting player', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
@@ -129,7 +129,7 @@ router.post('/add-button-staff', async (req,res) => {
     
     db.run(query,[req.body.name, req.body.role, currentTeam], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error updating user'});
+            return res.render('error',{message : 'Error in adding staff', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
@@ -155,7 +155,7 @@ router.post('/update-button-staff', async (req,res) => {
 
     db.run(query,[req.body.name, req.body.role, oldData.staff_id], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error updating user'});
+            return res.render('error',{message : 'Error in updating staff', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
@@ -167,11 +167,11 @@ router.post('/delete-staff', async(req,res) => {
     const query = `DELETE FROM Supporting_staff WHERE staff_id = ?`;
     db.run(query,[req.body.id], (err) => {
         if(err) {
-            return res.status(500).json({ error: 'Error deleting staff'});
+            return res.render('error',{message : 'Error deleting staff', returnRoute : '/admin-home'});
         }
 
         res.redirect('/admin-home');
-    })    
-})
+    });    
+});
 
 module.exports = router;

@@ -20,10 +20,10 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  padding: 20px;
+  padding: 5px;
   color: #00246b;
   font-size: 18px; /* Increase font size of details */
-  /*border-bottom: 1px solid #00246b;*/
+  border-bottom: 1px solid #00246b;
   background-color: transparent;
 }
 
