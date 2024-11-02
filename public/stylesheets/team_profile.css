@@ -104,3 +104,13 @@ body {
   a {
     text-decoration: none;
   }
+
+  .subheading {
+    /* display: block; */
+    color: #00246b;
+    font-size: 25px;
+    text-align: center;
+    /* border-bottom: 1px solid #00246b; */
+    background-color: transparent;
+    /* margin: 20px auto 40px auto; */
+  }

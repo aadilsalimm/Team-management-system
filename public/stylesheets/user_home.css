@@ -92,7 +92,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.5em; /* Increased font size */
+    font-size: 3.5em; /* Increased font size */
     color: var(--primary-color); /* Text color for cards as #00246b */
     padding: 20px; /* Added padding */
     text-align: center;

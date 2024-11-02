@@ -25,6 +25,10 @@
   
 </div>
 
+<div class="subheading">
+  <h2>Players</h2>
+</div>
+
 <div class="container">
   <table>
     <thead>
@@ -40,6 +44,30 @@
         <td>{{this.role}}</td> 
       </tr>
     {{/each}}
+    </tbody>
+  </table>
+</div>
+
+<div class="subheading">
+  <h2>Supporting staffs</h2>
+</div>
+
+<div class="container" style="margin: 10px auto 30px auto">
+  <table>
+    <thead>
+      <tr>
+        <th>Staff Name</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      {{#each supportingStaffData}}
+      <tr>
+        <td>{{staff_name}}</td>
+        <td>{{role}}</td>
+      </tr>
+      {{/each}}
     </tbody>
   </table>
 </div>

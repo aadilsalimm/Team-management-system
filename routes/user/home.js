@@ -54,7 +54,14 @@ router.post('/team', async(req,res) => {
     });
   });
 
-  res.render('user/team-profile', {teamInfo, playerData, playerCount : playerData[0].count});
+  const supportingStaffData = await new Promise((resolve, reject) => {
+    db.all(`SELECT * FROM Supporting_staff WHERE team = ?`,[req.body.id], (err,data) => {
+        if(err) reject (err);
+        else resolve(data);
+    })
+  })
+
+  res.render('user/team-profile', {teamInfo, playerData, playerCount : playerData[0].count, supportingStaffData});
 });
 
 module.exports = router;

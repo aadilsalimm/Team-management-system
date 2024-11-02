@@ -11,7 +11,6 @@ const session = require('express-session');
 //user routers
 var welcomeRouter = require('./routes/welcome');
 var homeRouter = require('./routes/user/home');
-var usersRouter = require('./routes/users');
 
 //admin routers
 var adminLoginRouter = require('./routes/admin/login');
@@ -44,7 +43,6 @@ app.use(session({
 //user routes
 app.use('/', welcomeRouter);
 app.use('/home',homeRouter);
-app.use('/users', usersRouter);
 
 //admin routes
 app.use('/admin',adminLoginRouter);
