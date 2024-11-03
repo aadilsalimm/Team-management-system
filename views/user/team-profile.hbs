@@ -18,6 +18,7 @@
     <h3>
       <ul>
         <li>Captain - {{teamInfo.captain}}</li>
+        <li>Coach - {{coachName.staff_name}}</li>
         <li>{{playerCount}} players</li>
       </ul>
     </h3>
@@ -35,13 +36,17 @@
       <tr>
         <th>Player</th>
         <th>Role</th>
+        <th>Age</th>
+        <th>Place</th>
       </tr>
     </thead>
     <tbody>
     {{#each playerData}}
       <tr>
         <td>{{this.player_name}}</td>
-        <td>{{this.role}}</td> 
+        <td>{{this.role}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.place}}</td> 
       </tr>
     {{/each}}
     </tbody>
@@ -58,6 +63,8 @@
       <tr>
         <th>Staff Name</th>
         <th>Role</th>
+        <th>Age</th>
+        <th>Place</th>
       </tr>
     </thead>
     <tbody>
@@ -66,6 +73,8 @@
       <tr>
         <td>{{staff_name}}</td>
         <td>{{role}}</td>
+        <td>{{this.age}}</td>
+        <td>{{this.place}}</td>
       </tr>
       {{/each}}
     </tbody>

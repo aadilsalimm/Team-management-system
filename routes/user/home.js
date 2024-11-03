@@ -54,6 +54,14 @@ router.post('/team', async(req,res) => {
     });
   });
 
+  //Get name of coach
+  const coachName = await new Promise((resolve,reject) => {
+    db.get(`SELECT staff_name FROM Supporting_staff WHERE role = 'Coach' AND team = ?`, [req.body.id], (err,data) => {
+        if(err) reject(err);
+        else resolve(data);
+    })
+  })
+
   const supportingStaffData = await new Promise((resolve, reject) => {
     db.all(`SELECT * FROM Supporting_staff WHERE team = ?`,[req.body.id], (err,data) => {
         if(err) reject (err);
@@ -61,7 +69,7 @@ router.post('/team', async(req,res) => {
     })
   })
 
-  res.render('user/team-profile', {teamInfo, playerData, playerCount : playerData[0].count, supportingStaffData});
+  res.render('user/team-profile', {teamInfo, playerData, playerCount : playerData[0].count, supportingStaffData,coachName});
 });
 
 module.exports = router;

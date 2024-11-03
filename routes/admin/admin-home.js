@@ -45,12 +45,21 @@ router.get('/', async(req, res) => {
         })
     })
 
+    //Get name of coach
+    const coachName = await new Promise((resolve,reject) => {
+        db.get(`SELECT staff_name FROM Supporting_staff WHERE role = 'Coach' AND team = ?`, [adminData.teamID], (err,data) => {
+            if(err) reject(err);
+            else resolve(data);
+        })
+    })
+    console.log(coachName);
     res.render('admin/admin-home', { 
         adminData, 
         teamInfo, 
         playerData,
         playerCount: playerData.length > 0 ? playerData[0].count : 0,
-        supportingStaffData
+        supportingStaffData,
+        coachName
     });
     
 });
@@ -61,7 +70,9 @@ router.post('/edit-player', async(req,res) => {
     oldData = {
         player_id: req.body.id,
         name: req.body.name,
-        role: req.body.role
+        role: req.body.role,
+        age: req.body.age,
+        place: req.body.place
     };
     //console.log(oldData);
     
@@ -69,10 +80,10 @@ router.post('/edit-player', async(req,res) => {
 });
 
 router.post('/update-button-player', async (req,res) => {
-    const query = `UPDATE Players SET player_name = ?, role = ? WHERE player_id = ?`;
+    const query = `UPDATE Players SET player_name = ?, role = ?, age = ?, place = ? WHERE player_id = ?`;
     //console.log(oldData.player_id + " " + req.body.name +" " + req.body.role);
 
-    db.run(query,[req.body.name, req.body.role, oldData.player_id], (err) => {
+    db.run(query,[req.body.name, req.body.role, req.body.age, req.body.place, oldData.player_id], (err) => {
         if(err) {
             return res.render('error',{message : 'Error updating user', returnRoute : '/admin-home'});
         }
@@ -89,9 +100,9 @@ router.get('/add-player', async (req,res) => {
 })
 
 router.post('/add-button-player', async (req,res) => {
-    const query = `INSERT INTO Players (player_name, team, role) VALUES (?, ?, ?)`;
+    const query = `INSERT INTO Players (player_name, team, role, age, place) VALUES (?, ?, ?, ?, ?)`;
     
-    db.run(query,[req.body.name, currentTeam, req.body.role], (err) => {
+    db.run(query,[req.body.name, currentTeam, req.body.role, req.body.age, req.body.place], (err) => {
         if(err) {
             return res.render('error',{message : 'Error in adding player', returnRoute : '/admin-home'});
         }
@@ -125,9 +136,9 @@ router.get('/add-staff', async (req,res) => {
 })
 
 router.post('/add-button-staff', async (req,res) => {
-    const query = `INSERT INTO Supporting_staff (staff_name, role, team) VALUES (?, ?, ?)`;
+    const query = `INSERT INTO Supporting_staff (staff_name, role, team, age, place) VALUES (?, ?, ?, ?, ?)`;
     
-    db.run(query,[req.body.name, req.body.role, currentTeam], (err) => {
+    db.run(query,[req.body.name, req.body.role, currentTeam, req.body.age, req.body.place], (err) => {
         if(err) {
             return res.render('error',{message : 'Error in adding staff', returnRoute : '/admin-home'});
         }
@@ -142,7 +153,9 @@ router.post('/edit-staff', async(req,res) => {
     oldData = {
         staff_id: req.body.id,
         name: req.body.name,
-        role: req.body.role
+        role: req.body.role,
+        age: req.body.age,
+        place: req.body.place
     };
     //console.log(oldData);
     
@@ -150,10 +163,10 @@ router.post('/edit-staff', async(req,res) => {
 });
 
 router.post('/update-button-staff', async (req,res) => {
-    const query = `UPDATE Supporting_staff SET staff_name = ?, role = ? WHERE staff_id = ?`;
+    const query = `UPDATE Supporting_staff SET staff_name = ?, role = ?, age = ?, place = ? WHERE staff_id = ?`;
     //console.log(oldData.player_id + " " + req.body.name +" " + req.body.role);
 
-    db.run(query,[req.body.name, req.body.role, oldData.staff_id], (err) => {
+    db.run(query,[req.body.name, req.body.role, req.body.age, req.body.place, oldData.staff_id], (err) => {
         if(err) {
             return res.render('error',{message : 'Error in updating staff', returnRoute : '/admin-home'});
         }

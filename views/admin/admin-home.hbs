@@ -23,7 +23,7 @@
         <li>{{teamInfo.team_name}} Team</li>
         <li>Captain - {{teamInfo.captain}}</li>
         <li>{{playerCount}} players</li>
-        {{!-- <li>250 Matches</li> --}}
+        <li>Coach - {{coachName.staff_name}}</li>
       </ul>
     </h3>
   </div>
@@ -49,8 +49,8 @@
       <tr>
         <th>Player</th>
         <th>Role</th>
-        {{!-- <th>Runs</th>
-        <th>Bat.avg</th>  --}}
+        <th>Age</th>
+        <th>Place</th>
         <th>Actions</th> 
       </tr>
     </thead>
@@ -60,12 +60,16 @@
       <tr>
         <td>{{player_name}}</td>
         <td>{{role}}</td>
+        <td>{{age}}</td>
+        <td>{{place}}</td>
         <td>
 
           <form action="/admin-home/edit-player" method="POST" style="display:inline;">
             <input type="hidden" name="id" value={{this.player_id}}>
             <input type="hidden" name="name" value={{this.player_name}}>
             <input type="hidden" name="role" value={{this.role}}>
+            <input type="hidden" name="age" value={{this.age}}>
+            <input type="hidden" name="place" value={{this.place}}>
             <button class="action-btn edit-btn">Edit</button>
           </form>
 
@@ -95,10 +99,10 @@
   <table>
     <thead>
       <tr>
-        <th>Player</th>
+        <th>Staff</th>
         <th>Role</th>
-        {{!-- <th>Runs</th>
-        <th>Bat.avg</th>  --}}
+        <th>Age</th>
+        <th>Place</th>
         <th>Actions</th> 
       </tr>
     </thead>
@@ -108,12 +112,16 @@
       <tr>
         <td>{{staff_name}}</td>
         <td>{{role}}</td>
+        <td>{{age}}</td>
+        <td>{{place}}</td>
         <td>
 
           <form action="/admin-home/edit-staff" method="POST" style="display:inline;">
             <input type="hidden" name="id" value={{this.staff_id}}>
             <input type="hidden" name="name" value={{this.staff_name}}>
             <input type="hidden" name="role" value={{this.role}}>
+            <input type="hidden" name="age" value={{this.age}}>
+            <input type="hidden" name="place" value={{this.place}}>
             <button class="action-btn edit-btn">Edit</button>
           </form>
 
