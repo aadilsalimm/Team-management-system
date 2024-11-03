@@ -2,7 +2,7 @@
 
 .login-page {
   width: 360px;
-  padding: 5% 0 0;
+  /* padding: 5% 0 0; */
   padding-left:1%;
   margin: auto;
 }
@@ -105,4 +105,14 @@ body {
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+.subheading {
+  /* display: block; */
+  color: #FFFFFF;
+  font-size: 25px;
+  text-align: center;
+  /* border-bottom: 1px solid #00246b; */
+  background-color: transparent;
+  /* margin: 20px auto 40px auto; */
 }
