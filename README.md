@@ -38,22 +38,17 @@ Make sure you have Node.js and npm installed on your machine.
 
 1.  Clone the repo
     ```sh
-    git clone [https://github.com/your_username/your_project_name.git](https://github.com/your_username/your_project_name.git)
+    git clone https://github.com/aadilsalimm/Team-management-system
     ```
 2.  Navigate to the project directory
     ```sh
-    cd your_project_name
+    cd Team-management-system
     ```
 3.  Install NPM packages
     ```sh
     npm install
     ```
-4.  Set up your database. The SQLite database file should be included, but if you need to initialize it, you can run:
-    ```sh
-    # Add command to initialize your database if needed
-    # e.g., node setup_database.js
-    ```
-5.  Start the server
+4.  Start the server
     ```sh
     npm start
     ```
